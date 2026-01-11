@@ -1,4 +1,8 @@
+#!/bin/bash
 set -eo pipefail
+
+script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+cd $script_dir
 
 # configuration - change as required
 docker_tag=fpih-test:latest
@@ -13,6 +17,12 @@ else
     echo "docker tag '$docker_tag' already exists"
 fi
 
-# run docker
-docker container run $docker_tag echo "hello"
-
+# build and execute tests in docker container
+docker container run -v .:/code $docker_tag /bin/bash -c \
+" \
+cd /code/test; \
+mkdir build -p; \
+cmake . -B build -G \"Ninja\"; \
+cmake --build build; \
+build/fpih-test \
+" 

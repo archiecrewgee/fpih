@@ -1,5 +1,8 @@
 FROM ubuntu
 
+# arguments
+ARG UNITY_SRC="https://github.com/ThrowTheSwitch/Unity/archive/refs/tags/v2.6.1.tar.gz"
+
 # set as no user interface (pure terminal interaction)
 ENV DEBIAN_FRONTEND=non-interactive
 
@@ -8,8 +11,6 @@ RUN \
     apt update -y && apt upgrade -y && apt install -y \
 # basic tools
     wget \
-    python3 \
-    python-is-python3 \
 # build tools
     cmake \ 
     ninja-build \
@@ -22,6 +23,19 @@ WORKDIR /
 
 # set commands to run from bash
 CMD "/bin/bash"
+SHELL ["/bin/bash", "-c"]
 
-# build and run tests
+# install latest Unity test framework
+RUN \ 
+mkdir unity && \ 
+pushd unity && \ 
+    mkdir tmp && \ 
+    pushd tmp && \ 
+        wget ${UNITY_SRC} && \ 
+        tar -xvzf *.tar.gz  && \ 
+        cp -v -r */src/*[hc] .. && \ 
+    popd && \ 
+    rm -rf tmp && \ 
+popd 
+
 RUN echo "hello world"

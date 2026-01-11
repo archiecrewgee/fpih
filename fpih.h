@@ -35,7 +35,7 @@ static inline uint32_t fpih_32_lsb_index(uint32_t n);
  */
 static inline uint32_t fpih_32_logical_lshift(uint32_t n, size_t shift) {
     #ifdef FPIH_DEVELOPMENT
-    if (shift > (sizeof(n) * 8) - fpih_32_msb_index(n)) fpih_printf("[FPIH] overflow warning @ %s: %u << %u\n", __FUNCTION_NAME__, n, shift);
+    // if (shift > (sizeof(n) * 8) - fpih_32_msb_index(n)) fpih_printf("[FPIH] overflow warning @ %s: %u << %u\n", __FUNCTION_NAME__, n, shift);
     #endif
 
     n <<= shift;
@@ -51,7 +51,7 @@ static inline uint32_t fpih_32_logical_lshift(uint32_t n, size_t shift) {
  */
 static inline uint32_t fpih_32_logical_rshift(uint32_t n, size_t shift) {
     #ifdef FPIH_DEVELOPMENT
-    if (shift > fpih_32_lsb_index(n)) fpih_printf("[FPIH] underflow warning @ %s: %u >> %u\n", __FUNCTION_NAME__, n, shift);
+    // if (shift > fpih_32_lsb_index(n)) fpih_printf("[FPIH] underflow warning @ %s: %u >> %u\n", __FUNCTION_NAME__, n, shift);
     #endif
 
     n >>= shift;

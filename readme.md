@@ -10,12 +10,16 @@ Quick to pick up and work with straight away but performant, verifiable and scal
     - Single C(++) header
     - Simple functions with clear use cases
  - **Performant**:
-    - Optimal implementations for each operation
     - Intrinsic compatible primatives  
  - **Verifiable**
     - Range-precision tradeoff and overflow/underflow protection front and centre during development  
     - Floating point vs. fixed point algorithm testing framework (todo: tighten this up) 
     - No undefined behaviour  
+
+## Requirements
+
+ - **Testing**
+   - Docker
 
 ## Credit 
 
