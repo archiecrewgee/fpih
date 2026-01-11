@@ -19,12 +19,16 @@ Quick to pick up and work with straight away but performant, verifiable and scal
 
 ## Requirements
 
- - **Testing**
-   - Docker
+There are none.
 
-## 
+Docker is required for testing.
+
+## Testing
+
+ 1. Ensure Docker is installed
+ 2. Run `run_tests.sh` script 
 
 ## Credit 
 
- - heavily influenced by: https://github.com/mgetka/fptc-lib
+ - Heavily influenced by: https://github.com/mgetka/fptc-lib
  - todo: link all the code/papers you've stolen

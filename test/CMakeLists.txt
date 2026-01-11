@@ -20,7 +20,7 @@ target_sources(fpih-test PRIVATE ${UNITY_DIR}/unity.c)
 # add tests to testing executable
 message(status "adding tests")
 target_sources(fpih-test PRIVATE 
-    fpih-test.c
+    fpih-test-util-32.c
 )
 
 # add code under test

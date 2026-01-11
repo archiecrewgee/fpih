@@ -56,28 +56,30 @@ static inline uint32_t fpih_32_logical_rshift(uint32_t n, size_t shift) {
 
 /**
  * @brief returns the index of the most significant bit of a 32-bit value; for example `fpih_32_msb_index(0x000008f8) == 11`
+ * @note index is `32` if no MSB exists
  * 
  * @param n 32-bit value
  * @return uint32_t MSB index
  */
 static inline uint32_t fpih_32_msb_index(uint32_t n) {
-    uint32_t index = sizeof(n) - 1;
-    for (uint32_t v = 1 << (sizeof(v) - 1); v > 0; v = fpih_32_logical_rshift(v, 1), index--) 
-        if (v & n) break;
-    return index;
+    uint32_t index = fpih_bit_width(n) - 1;
+    for (uint32_t v = 1 << (fpih_bit_width(v) - 1); v > 0; v = fpih_32_logical_rshift(v, 1), index--)
+        if (v & n) return index;
+    return fpih_bit_width(n);
 }
 
 /**
  * @brief returns the index of the least significant bit of a 32-bit value; for example `fpih_32_lsb_index(0x000008f8) == 3`
+ * @note index is `32` if no LSB exists 
  * 
  * @param n 32-bit value
  * @return uint32_t LSB index
  */
 static inline uint32_t fpih_32_lsb_index(uint32_t n) {
     uint32_t index = 0;
-    for (uint32_t v = 1; v > 0; v = fpih_32_logical_lshift(v, 1), index++) 
-        if (v & n) break;
-    return index;
+    for (uint32_t v = 1; v != 0; v = fpih_32_logical_lshift(v, 1), index++) 
+        if (v & n) return index;
+    return fpih_bit_width(n);
 }
 
 /**
