@@ -9,7 +9,7 @@ extern "C" {
 #include "stddef.h"
 #include "stdio.h"
 
-#define FPIH_DEVELOPMENT
+// #define FPIH_DEVELOPMENT
 
 // replace with formated print function with argument order matching stdio's `printf`
 #define fpih_printf(...) printf(__VA_ARGS__)
@@ -23,15 +23,16 @@ extern "C" {
 
 #define fpih_32_one(fb) ((ufpt32_t) 1 << fb)
 
-#define float_to_fpt32(n, fb)   ((fpt32_t)((n) * fpih_32_one(fb) + ((n) >= 0 ? 0.5 : -0.5)))
-#define fpt32_to_float(n, fb)   ((float)((n) * (1.0 / (float) fpih_32_one(fb))))
-#define int_to_fpt32(n, fb)     (fpih_fpt32_arithmetic_lshift(n, fb))
-#define fpt32_to_int(n, fb)     (fpih_fpt32_arithmetic_rshift(n, fb))
+// todo: should these be inline functions/should the primatives be macros??
+#define fpih_float_to_fpt32(n, fb)   ((fpt32_t)((n) * fpih_32_one(fb) + ((n) >= 0 ? 0.5 : -0.5)))
+#define fpih_fpt32_to_float(n, fb)   ((float)((n) * (1.0 / (float) fpih_32_one(fb))))
+#define fpih_int32_to_fpt32(n, fb)     (fpih_fpt32_arithmetic_lshift(n, fb))
+#define fpih_fpt32_to_int32(n, fb)     (fpih_fpt32_arithmetic_rshift(n, fb))
 
-#define float_to_ufpt32(n, fb)   (ufpt32_t)((n < 0.0) ?  0 : ((n) * fpih_32_one(fb) + 0.5))
-#define ufpt32_to_float(n, fb)   ((float)((n) * (1.0 / (float) fpih_32_one(fb))))
-#define int_to_ufpt32(n, fb)     (fpih_ufpt32_arithmetic_lshift(n, fb))
-#define ufpt32_to_int(n, fb)     (fpih_ufpt32_arithmetic_rshift(n, fb))
+#define fpih_float_to_ufpt32(n, fb)   (ufpt32_t)((n < 0.0) ?  0 : ((n) * fpih_32_one(fb) + 0.5))
+#define fpih_ufpt32_to_float(n, fb)   ((float)((n) * (1.0 / (float) fpih_32_one(fb))))
+#define fpih_uint32_to_ufpt32(n, fb)     (fpih_ufpt32_arithmetic_lshift(n, fb))
+#define fpih_ufpt32_to_uint32(n, fb)     (fpih_ufpt32_arithmetic_rshift(n, fb))
 
 typedef uint32_t ufpt32_t;
 typedef int32_t  fpt32_t;
@@ -182,11 +183,11 @@ static inline fpt32_t fpih_fpt32_arithmetic_rshift(fpt32_t n, size_t shift) {
  * @param n 
  * @param whole_bits 
  */
-static void fpih_ufpt32_to_str(char * str, ufpt32_t n, size_t whole_bits) {
+// static void fpih_ufpt32_to_str(char * str, ufpt32_t n, size_t whole_bits) {
     
 
-    for ()
-}
+//     for ()
+// }
 
 #ifdef cpluspus
 }
