@@ -20,9 +20,9 @@ fi
 # build and execute tests in docker container
 docker container run -v .:/code $docker_tag /bin/bash -c \
 " \
-cd /code/test; \
-mkdir build -p; \
-cmake . -B build -G \"Ninja\"; \
-cmake --build build; \
-build/fpih-test \
+cd /code/test && \
+mkdir build -p && \
+cmake . -B build -G \"Ninja\" && \
+cmake --build build && \
+./build/fpih-test \
 " 
