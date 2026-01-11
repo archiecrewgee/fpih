@@ -11,6 +11,7 @@ Quick to pick up and work with straight away but performant, verifiable and scal
     - Simple functions with clear use cases
  - **Performant**:
     - Intrinsic compatible primatives  
+    - Optimise the range-precision tradeoff intrinsic to fixed point numbers
  - **Verifiable**
     - Range-precision tradeoff and overflow/underflow protection front and centre during development  
     - Floating point vs. fixed point algorithm testing framework (todo: tighten this up) 
@@ -21,6 +22,9 @@ Quick to pick up and work with straight away but performant, verifiable and scal
  - **Testing**
    - Docker
 
+## 
+
 ## Credit 
 
+ - heavily influenced by: https://github.com/mgetka/fptc-lib
  - todo: link all the code/papers you've stolen
