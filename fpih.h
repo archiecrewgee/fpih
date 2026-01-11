@@ -14,7 +14,7 @@
 #define FPIH_32_ONES        (UINT32_MAX)
 
 typedef uint32_t ufpt32_t;
-typedef ufpt32_t fpt32_t;
+typedef int32_t  fpt32_t;
 
 /* util functions (32-bit) */
 static inline uint32_t fpih_32_logical_lshift(uint32_t n, size_t shift);
@@ -83,7 +83,7 @@ static inline uint32_t fpih_32_lsb_index(uint32_t n) {
 }
 
 /**
- * @brief performs an arithmetic left shift on an unsigned 32-bit fpt value
+ * @brief performs an arithmetic left shift (i.e. `n << x` == `n * (2^x)`) on an unsigned 32-bit fpt value
  * 
  * @param nalue to left shift
  * @param shift left shit (must be positive)
@@ -95,7 +95,7 @@ static inline fpt32_t fpih_ufpt32_arithmetic_lshift(ufpt32_t n, size_t shift) {
 }
 
 /**
- * @brief performs an arithmetic right shift on an unsigned 32-bit fpt value
+ * @brief performs an arithmetic right shift (i.e. `n >> x` == `n / (2^x)`) on an unsigned 32-bit fpt value
  * 
  * @param nalue to right shift
  * @param shift right shit (must be positive)
@@ -107,14 +107,14 @@ static inline fpt32_t fpih_ufpt32_arithmetic_rshift(ufpt32_t n, size_t shift) {
 }
 
 /**
- * @brief performs an arithmetic left shift on a signed 32-bit fpt value
+ * @brief performs an arithmetic left shift (i.e. `n << x` == `n * (2^x)`) on a signed 32-bit fpt value
  * @note the sign bit is preserved on overflow condition; i.e. overflow occurs at `shift > 31 - msb_index(n)`
  * 
  * @param nalue to left shift
  * @param shift left shit (must be positive)
  * @return fpt32_t left shifted unsigned fpt value 
  */
-static inline fpt32_t fpih_fpt32_lshift(fpt32_t n, size_t shift) {
+static inline fpt32_t fpih_fpt32_arithmetic_lshift(fpt32_t n, size_t shift) {
     uint32_t sign = fpih_sbit(n);
     n = fpih_32_logical_lshift(n, shift);
     n |= sign;
@@ -122,13 +122,14 @@ static inline fpt32_t fpih_fpt32_lshift(fpt32_t n, size_t shift) {
 }
 
 /**
- * @brief performs an arithmetic right shift on a signed 32-bit fpt value
+ * @brief performs an arithmetic right shift (i.e. `n >> x` == `n / (2^x)`) on a signed 32-bit fpt value
+ * @note underflow is not accounted for in release version such that `-1 >> x` will saturate at `-1`
  * 
  * @param nalue to right shift
  * @param shift right shit (must be positive)
  * @return fpt32_t right shifted signed fpt value 
  */
-static inline fpt32_t fpih_fpt32_rshift(fpt32_t n, size_t shift) {
+static inline fpt32_t fpih_fpt32_arithmetic_rshift(fpt32_t n, size_t shift) {
     int32_t sign = fpih_sbit(n);
     n = fpih_32_logical_rshift(n, shift);
     if (sign) n |= fpih_32_logical_lshift(FPIH_32_ONES, fpih_bit_width(n) - shift);

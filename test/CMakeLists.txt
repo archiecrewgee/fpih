@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 3.22)
 
 # set cmake options
 
+# add compile options
+add_compile_options(-Wall -Wextra -Wpedantic -Werror)
+
 # constants
 set(UNITY_DIR "/unity") # note this assumes the file is being run in the fpih-test docker container
 
@@ -25,5 +28,3 @@ target_sources(fpih-test PRIVATE
 
 # add code under test
 target_include_directories(fpih-test PRIVATE .. code-under-test)
-
-# add compile options
