@@ -1,3 +1,10 @@
+#ifndef FPIH_H_
+#define FPIH_H_
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "stdint.h"
 #include "stddef.h"
 #include "stdio.h"
@@ -11,7 +18,20 @@
 #define fpih_msb(n) ((size_t) 1 << (fpih_bit_width(n) - 1))
 #define fpih_sbit(n) (n & fpih_msb(n))
 
+/* 32-bit */
 #define FPIH_32_ONES        (UINT32_MAX)
+
+#define fpih_32_one(fb) ((ufpt32_t) 1 << fb)
+
+#define float_to_fpt32(n, fb)   ((fpt32_t)((n) * fpih_32_one(fb) + ((n) >= 0 ? 0.5 : -0.5)))
+#define fpt32_to_float(n, fb)   ((float)((n) * (1.0 / (float) fpih_32_one(fb))))
+#define int_to_fpt32(n, fb)     (fpih_fpt32_arithmetic_lshift(n, fb))
+#define fpt32_to_int(n, fb)     (fpih_fpt32_arithmetic_rshift(n, fb))
+
+#define float_to_ufpt32(n, fb)   (ufpt32_t)((n < 0.0) ?  0 : ((n) * fpih_32_one(fb) + 0.5))
+#define ufpt32_to_float(n, fb)   ((float)((n) * (1.0 / (float) fpih_32_one(fb))))
+#define int_to_ufpt32(n, fb)     (fpih_ufpt32_arithmetic_lshift(n, fb))
+#define ufpt32_to_int(n, fb)     (fpih_ufpt32_arithmetic_rshift(n, fb))
 
 typedef uint32_t ufpt32_t;
 typedef int32_t  fpt32_t;
@@ -153,3 +173,22 @@ static inline fpt32_t fpih_fpt32_arithmetic_rshift(fpt32_t n, size_t shift) {
     if (sign) n |= fpih_32_logical_lshift(FPIH_32_ONES, fpih_bit_width(n) - shift);
     return n; 
 }
+
+/**
+ * @brief 
+ * @note due to the functions complexity it is not encforced as inline
+ * 
+ * @param str 
+ * @param n 
+ * @param whole_bits 
+ */
+static void fpih_ufpt32_to_str(char * str, ufpt32_t n, size_t whole_bits) {
+    
+
+    for ()
+}
+
+#ifdef cpluspus
+}
+#endif
+#endif

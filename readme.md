@@ -13,7 +13,7 @@ Quick to pick up and work with straight away but performant, verifiable and scal
     - Intrinsic compatible primatives  
     - Optimise the range-precision tradeoff intrinsic to fixed point numbers
  - **Verifiable**
-    - Range-precision tradeoff and overflow/underflow protection front and centre during development  
+    - Range-precision tradeoff and overflow/underflow detection front and centre during development  
     - Floating point vs. fixed point algorithm testing framework (todo: tighten this up) 
     - No undefined behaviour  
 
